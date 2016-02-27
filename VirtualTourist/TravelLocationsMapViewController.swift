@@ -140,6 +140,7 @@ class TravelLocationsMapViewController: UIViewController, NSFetchedResultsContro
     func getImages(pin: Pin, page: Int) {
         FlickrClient.sharedInstance().getImagesFromFlickrBySearch(searchLongitude: pin.coordinate.longitude, searchLatitude: pin.coordinate.latitude, page: page){
             photos, error in
+            dispatch_async(dispatch_get_main_queue(), {
             if let error = error {
                 //Handle error
                 print(error)
@@ -150,6 +151,7 @@ class TravelLocationsMapViewController: UIViewController, NSFetchedResultsContro
                     return photo
                 }
             }
+        })
         }
     }
     
